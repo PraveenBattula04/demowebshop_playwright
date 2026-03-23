@@ -1,0 +1,23 @@
+{
+  "name": "demowebshop_playwright",
+  "version": "1.0.0",
+  "description": "Demo webshop testcases.\r check node verison -> node --version\r npm init playwright@latest (for playwright code setup)\r choose below options:\r Language: typescript\r where to put end-to-end test: test",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PraveenBattula04/demowebshop_playwright.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PraveenBattula04/demowebshop_playwright/issues"
+  },
+  "homepage": "https://github.com/PraveenBattula04/demowebshop_playwright#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0"
+  }
+}
