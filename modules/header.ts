@@ -1,18 +1,20 @@
-import {Page, Locator } from '@playwright/test';
+import {Page, Locator, expect } from '@playwright/test';
 
 export class Header {
     private page: Page;
 
     // Locators
-    public logo: Locator;
-    public registerLink: Locator;
-    public loginLink: Locator;
-    public shoppingCartLink: Locator;
-    public wishlistLink: Locator;
-    public wishlistQnty: Locator;
-    public searchStoreBox: Locator;
-    public searchButton: Locator;
-    public shoppingCartQnty: Locator;
+    private logo: Locator;
+    private registerLink: Locator;
+    private loginLink: Locator;
+    private shoppingCartLink: Locator;
+    private wishlistLink: Locator;
+    private wishlistQnty: Locator;
+    private searchStore: Locator;
+    private searchButton: Locator;
+    private shoppingCartQnty: Locator;
+    private logoutButton: Locator;
+    private userLoggedIn: Locator;
     
 
     constructor(page: Page) {
@@ -24,23 +26,52 @@ export class Header {
         this.shoppingCartLink = page.locator('.cart-label').locator('text=Shopping cart');
         this.shoppingCartQnty = page.locator('.cart-qty');
         this.wishlistLink = page.locator('cart-label').locator('Wishlist');
-        this.wishlistQnty = page.locator('wishlist-qty');
-        this.searchStoreBox = page.locator('#small-searchterms');
+        this.wishlistQnty = page.locator('.wishlist-qty');
+        this.searchStore = page.locator('#small-searchterms');
         this.searchButton = page.locator('input[value="Search"]');
+        this.logoutButton = page.locator('.ico-logout');
+        this.userLoggedIn = page.locator('.header-links').locator('.account');
+
     }
 
-    headerfunc (var1: String) {
-        switch(var1) {
-            case 'logo': return this.logo;
-            case 'registerLink': return this.registerLink;
-            case 'loginLink': return this.loginLink;
-            case 'shoppingCartLink': return this.shoppingCartLink;
-            case 'wishlistLink': return this.wishlistLink;
-            case 'searchStoreBox': return this.searchStoreBox;
-            case 'searchButton': return this.searchButton;
-            case 'shoppingCartQnty': return this.shoppingCartQnty;
-            case 'wishlistQnty': return this.wishlistQnty;
-            default: throw new Error(`Invalid header element: ${var1}`);
-        }
+    async ClickOnRegisterLink () {
+        await this.registerLink.click();
     }
+    async ClickOnLoginLink () {
+        await this.loginLink.click();
+    }
+    async ClickOnShoppingCartLink () {
+        await this.shoppingCartLink.click();
+    }
+    async ClickOnWishlistLink () {
+        await this.wishlistLink.click();
+    }
+    async ClickOnSearchStore () {
+        await this.searchStore.click();
+    }
+    async ClickOnSearchButton () {
+        await this.searchButton.click();
+    }
+    async getShoppingCartQnty () {
+        let temp = await this.shoppingCartQnty.innerText();
+        return Number(temp.replace(/[()]/g, ''))
+    }
+    async getWishlistQnty () {
+        let temp = await this.wishlistQnty.innerText();
+        return Number(temp.replace(/[()]/g, ''))
+    }
+
+    async clickOnLogout () {
+        await this.logoutButton.click();
+    }
+
+    async getUserLoggedIn () {
+        return await this.userLoggedIn.innerText();
+    }
+
+    async verifyLoggedInEmail (expectedEmail: string) {
+        const displayedEmail = await this.getUserLoggedIn();
+        await expect(displayedEmail).toBe(expectedEmail);
+    }
+    
 };
