@@ -20,7 +20,7 @@ export class ReturningCustomer {
         this.loginButton = page.locator('input.button-1.login-button[value="Log in"]');
     }
 
-    async returningCustomerfunc (var1: String) {
+    returningCustomerfunc (var1: String) {
         switch(var1) {
             case 'email': return this.email;
             case 'password': return this.password;

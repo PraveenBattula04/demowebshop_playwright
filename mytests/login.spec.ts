@@ -1,6 +1,6 @@
 import {test, expect, Browser, chromium, Page, Locator } from '@playwright/test';
-import { Header } from '../modules/header.ts';
-import { ReturningCustomer } from '../modules/returningCustomer.ts';
+import { Header } from '../modules/Header.ts';
+import { ReturningCustomer } from '../pages/ReturningCustomer.ts';
 const username:string = 'iambatman004@gmail.com';
 const password:string = 'Abcd@1234';
 const books:[string, string] = ['Fiction', 'Health Book'];

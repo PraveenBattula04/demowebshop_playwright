@@ -60,3 +60,10 @@ create Login testcase
             - Direct Selector
             - Piercing Shadow DOM
 
+How to specify page object model & modules
+Page‑specific?✅ Page Object
+Business logic?✅ Page Object
+Reusable UI?✅ Module
+Layout/navigation?✅ Module
+Appears everywhere?✅ Module
+

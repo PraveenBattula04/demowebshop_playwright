@@ -1,0 +1,39 @@
+Folder structure
+playwright-project/
+│
+├── node_modules/
+│
+├── tests/
+│   ├── login.spec.ts
+│   ├── checkout.spec.ts
+│   └── smoke/
+│       └── smoke.spec.ts
+│
+├── pages/                # Page Object Model (POM)
+│   ├── LoginPage.ts
+│   ├── HomePage.ts
+│   └── CheckoutPage.ts
+│
+├── fixtures/             # Custom fixtures (optional)
+│   └── test-fixtures.ts
+│
+├── utils/                # Reusable utilities/helpers
+│   ├── testData.ts
+│   ├── helpers.ts
+│   └── constants.ts
+│
+├── modules/              # Reusable UI components (your usage pattern)
+│   ├── Header.ts
+│   ├── Footer.ts
+│   └── Menu.ts
+│
+├── test-results/         # Auto-generated (DO NOT MODIFY)
+│
+├── playwright-report/    # HTML reports
+│
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── playwright.config.ts
+├── tsconfig.json
+└── README.md

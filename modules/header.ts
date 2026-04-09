@@ -29,7 +29,7 @@ export class Header {
         this.searchButton = page.locator('input[value="Search"]');
     }
 
-    async headerfunc (var1: String) {
+    headerfunc (var1: String) {
         switch(var1) {
             case 'logo': return this.logo;
             case 'registerLink': return this.registerLink;
