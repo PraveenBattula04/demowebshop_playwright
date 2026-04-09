@@ -1,7 +1,7 @@
 import {test, expect, Browser, chromium, Page, Locator } from '@playwright/test';
-import { Header } from '../modules/Header.ts';
+import { Header } from '../modules/header.ts';
 import { ReturningCustomer } from '../pages/ReturningCustomer.ts';
-const username:string = 'iambatman004@gmail.com';
+const email:string = 'iambatman004@gmail.com';
 const password:string = 'Abcd@1234';
 const books:[string, string] = ['Fiction', 'Health Book'];
 
@@ -12,14 +12,12 @@ test('login', async ({page}) => {
     await page.goto('https://demowebshop.tricentis.com/');
     const header = new Header(page);
     const returningCustomer = new ReturningCustomer(page);
-    await (await header.headerfunc('loginLink')).click();
-    const emailField: Locator = await returningCustomer.returningCustomerfunc('email');
-    await expect(emailField).toBeVisible();
-    await emailField.fill(username);
-    await (await returningCustomer.returningCustomerfunc('password')).fill(password);
-    // await (await returningCustomer.returningCustomerfunc('remembermeCheckbox')).click();
-    // await (await returningCustomer.returningCustomerfunc('forgotPasswordLink')).click();
-    await (await returningCustomer.returningCustomerfunc('loginButton')).click();
-    page.close();
+    await header.ClickOnLoginLink();
+    await returningCustomer.login(email, password, false);
+    const intialShoppingCartQnty = await header.getShoppingCartQnty();
+    const initialWishilistQnty = await header.getWishlistQnty();
+    console.log(initialWishilistQnty, intialShoppingCartQnty);
+    await header.verifyLoggedInEmail(email);
+    await page.close();
     // await browser.close();
 })
