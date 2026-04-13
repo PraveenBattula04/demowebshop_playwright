@@ -168,7 +168,7 @@ export class ShoppingCart {
 
     
     async getSummaryRowIndex(label: string): Promise<number> {
-        const leftCells = this.page.locator('div.totals .cart-total tbody tr td.cart-total-left');
+        const leftCells = this.page.locator('table.cart-total tbody tr td.cart-total-left');
         const count = await leftCells.count();
         for (let i = 0; i < count; i++) {
             const text = (await leftCells.nth(i).innerText()).trim();
@@ -185,9 +185,9 @@ export class ShoppingCart {
         const index = await this.getSummaryRowIndex(label);
         if(index === -1) return 'false'
         return await this.page
-            .locator('div.totals .cart-total tbody tr')
+            .locator('div.totals table.cart-total tbody tr')
             .nth(index)
-            .locator('td.cart-total-right span.nobr')
+            .locator('td.cart-total-right span').nth(1)
             .innerText();
     }
 
@@ -207,6 +207,7 @@ export class ShoppingCart {
     async verifyCartRowTotalsAndSubtotal() {
         const cartTotal = await this.calulateAllProductTotal();
         const subTotal = await this.getSubtotal();
+        console.log(cartTotal, subTotal, 'carttotalsubtotal')
         if(!(cartTotal === subTotal))
             throw new Error('Cart summary Sub-Total and Product Line Items Totals are not Matching');
         }

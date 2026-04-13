@@ -11,8 +11,8 @@ import { BillingAddressPage } from '../pages/checkout/BillingAddressPage.ts';
 import { ShippingAddressPage } from '../pages/checkout/ShippingAddressPage.ts';
 import { PaymentMethodPage } from '../pages/checkout/PaymentMethodPage.ts';
 import { PaymentInfoPage } from '../pages/checkout/PaymentInfoPage.ts';
-import { ShippingMethodPage } from '../pages/checkout/ShippingMethodPage.ts';\
-import { ConfirmOrderPage } from '../'
+import { ShippingMethodPage } from '../pages/checkout/ShippingMethodPage.ts';
+import { ConfirmOrderPage } from '../pages/checkout/ConfirmOrderPage.ts';
 
 
 const email:string = 'iambatman004@gmail.com';
@@ -47,7 +47,7 @@ test('Create Order', async ({page}) => {
     const shippingMethodPage = new ShippingMethodPage(page);
     const paymentMethodpage = new PaymentMethodPage(page);
     const paymentInfoPage = new PaymentInfoPage(page);
-    const confirmOrderPage = new 
+    const confirmOrderPage = new ConfirmOrderPage(page);
     await header.ClickOnLoginLink();
     await returningCustomer.login(email, password, false);
     const intialShoppingCartQnty = await header.getShoppingCartQnty();
@@ -83,6 +83,7 @@ test('Create Order', async ({page}) => {
     await paymentMethodpage.clickOnContinue();
     await paymentInfoPage.verifyCodText();
     await paymentInfoPage.clickOnContinue();
+    await confirmOrderPage.verifyConfirmOrderTitle();
     await shoppingCart.verifyCartRowTotalsAndSubtotal();
     await shoppingCart.verifyCartSummaryCalculations();
     // await page.close();

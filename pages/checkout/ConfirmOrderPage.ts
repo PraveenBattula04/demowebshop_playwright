@@ -22,7 +22,7 @@ export class ConfirmOrderPage {
 	}
 
     async verifyConfirmOrderTitle() {
-        expect(await this.confirmOrderTitle.innerText()).toBe('Confirm order');
+        expect(await this.confirmOrderTitle.innerText()).toBe('Confirm Order');
     }
 
 	async clickConfirmOrder() {
