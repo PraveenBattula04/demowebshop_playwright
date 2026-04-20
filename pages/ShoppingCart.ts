@@ -210,7 +210,7 @@ export class ShoppingCart {
         console.log(cartTotal, subTotal, 'carttotalsubtotal')
         if(!(cartTotal === subTotal))
             throw new Error('Cart summary Sub-Total and Product Line Items Totals are not Matching');
-        }
+    }
 
     async clickOnAgreeToTerms() {
         if (!(await this.agreeCheckbox.isChecked())) {

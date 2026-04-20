@@ -13,6 +13,7 @@ import { PaymentMethodPage } from '../pages/checkout/PaymentMethodPage.ts';
 import { PaymentInfoPage } from '../pages/checkout/PaymentInfoPage.ts';
 import { ShippingMethodPage } from '../pages/checkout/ShippingMethodPage.ts';
 import { ConfirmOrderPage } from '../pages/checkout/ConfirmOrderPage.ts';
+import { OrderCompletedPage } from '../pages/checkout/OrderCompletedPage.ts';
 
 
 const email:string = 'iambatman004@gmail.com';
@@ -48,6 +49,7 @@ test('Create Order', async ({page}) => {
     const paymentMethodpage = new PaymentMethodPage(page);
     const paymentInfoPage = new PaymentInfoPage(page);
     const confirmOrderPage = new ConfirmOrderPage(page);
+    const orderCompletedPage = new OrderCompletedPage(page);
     await header.ClickOnLoginLink();
     await returningCustomer.login(email, password, false);
     const intialShoppingCartQnty = await header.getShoppingCartQnty();
@@ -68,6 +70,7 @@ test('Create Order', async ({page}) => {
     // await shoppingCart.verifyCartSummaryCalculations();
     await shoppingCart.clickOnAgreeToTerms();
     await shoppingCart.clickCheckout();
+    await page.waitForLoadState('load');
     await checkoutPage.verifyCheckoutTitle();
     const newAddressOption = await billingAddressPage.verifyAddressDropdownOptions();
     if(newAddressOption) {
@@ -84,8 +87,12 @@ test('Create Order', async ({page}) => {
     await paymentInfoPage.verifyCodText();
     await paymentInfoPage.clickOnContinue();
     await confirmOrderPage.verifyConfirmOrderTitle();
-    await shoppingCart.verifyCartRowTotalsAndSubtotal();
-    await shoppingCart.verifyCartSummaryCalculations();
+    await confirmOrderPage.verifyCartRowTotalsAndSubtotal();
+    await confirmOrderPage.verifyCartSummaryCalculations();
+    await confirmOrderPage.clickConfirmOrder();
+    await orderCompletedPage.verifyOrderSuccess();
+    await orderCompletedPage.getOrderNumber();
+    await orderCompletedPage.clickOnContinue()
     // await page.close();
     // await browser.close();
 })
